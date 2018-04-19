@@ -51,10 +51,12 @@ const devWebpackConfig = merge(baseWebpackConfig, {
 		},
 		before(app) {
 			app.get('/api/seller', function (req, res) {
-				res.json({errno: 0, data: seller})
+				setTimeout(function () {
+					res.json({code: 0, data: seller})
+				}, 1000);
 			});
-			app.get('/api/goods', function (req, res) {
-				res.json({errno: 0, data: goods})
+			app.get('/api/products', function (req, res) {
+				res.json({code: 0, data: goods})
 			})
 		}
 	},
