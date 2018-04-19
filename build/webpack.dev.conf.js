@@ -53,7 +53,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
 			app.get('/api/seller', function (req, res) {
 				setTimeout(function () {
 					res.json({code: 0, data: seller})
-				}, 1000);
+				}, 2500);
 			});
 			app.get('/api/products', function (req, res) {
 				res.json({code: 0, data: goods})
