@@ -16,6 +16,10 @@
 					"http://img1.imgtn.bdimg.com/it/u=1482437651,683124644&fm=27&gp=0.jpg",
 				]
 			}
+		}, created() {
+			this.$http.get("./api/seller").then(response => {
+				console.log(response.data);
+			});
 		}
 	}
 </script>
