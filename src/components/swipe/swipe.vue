@@ -1,9 +1,7 @@
 <template>
 	<mt-swipe :auto="1000" class="swipe-style">
 		<mt-swipe-item v-for="imgData in imgDatas">
-			<a href="www.baidu.com">
-				<img :src="imgData" style="width:100%">
-			</a>
+			<img :src="imgData" style="width:100%">
 		</mt-swipe-item>
 	</mt-swipe>
 </template>
