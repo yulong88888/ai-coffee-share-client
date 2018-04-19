@@ -37,6 +37,8 @@
 <script>
 	import BScroll from 'better-scroll';
 
+	let isNoBegin = true;
+
 	export default {
 		name: "products",
 		props: ['products'],
@@ -102,11 +104,14 @@
 				this.productsScroll.scrollToElement(el, 300);
 			},
 		},
-		created() {
-			this.$nextTick(() => {
-				this._initScroll();
-				this._calculateHeight();
-			});
+		updated() {
+			if(isNoBegin){
+				this.$nextTick(() => {
+					this._initScroll();
+					this._calculateHeight();
+				});
+				isNoBegin = false;
+			}
 		}
 	}
 </script>
