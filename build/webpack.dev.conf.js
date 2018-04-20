@@ -16,8 +16,6 @@ const PORT = process.env.PORT && Number(process.env.PORT);
 
 //自己添加的模拟数据
 const appData = require('../data/data.json');
-const seller = appData.seller;
-const goods = appData.goods;
 
 const devWebpackConfig = merge(baseWebpackConfig, {
 	module: {
@@ -50,14 +48,11 @@ const devWebpackConfig = merge(baseWebpackConfig, {
 			poll: config.dev.poll,
 		},
 		before(app) {
-			app.get('/api/seller', function (req, res) {
+			app.get('/api/data', function (req, res) {
 				setTimeout(function () {
-					res.json({code: 0, data: seller})
-				}, 2500);
+					res.json({code: 0, recdata: appData})
+				}, 500);
 			});
-			app.get('/api/products', function (req, res) {
-				res.json({code: 0, data: goods})
-			})
 		}
 	},
 	plugins: [

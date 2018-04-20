@@ -33,7 +33,8 @@
 					</li>
 				</ul>
 			</div>
-			<Shopcart :delivery-price="deliveryPrice" :min-price="minPrice"></Shopcart>
+			<Shopcart :select-products="selectProducts" :delivery-price="basic.deliveryPrice"
+					  :min-price="basic.minPrice"></Shopcart>
 		</div>
 	</div>
 </template>
@@ -51,10 +52,10 @@
 			Shopcart
 		},
 		name: "products",
-		props: ['products'],
+		props: ['products', 'basic'],
 		data() {
 			return {
-				goods: [],
+				// goods: [],
 				listHeight: [],
 				scrollY: 0
 			};
@@ -70,6 +71,17 @@
 					}
 				}
 				return 0;
+			},
+			selectProducts() {
+				let products = [];
+				this.products.forEach((product) => {
+					product.product.forEach((p) => {
+						if (p.count) {
+							products.push(p);
+						}
+					});
+				});
+				return products;
 			}
 		},
 		methods: {

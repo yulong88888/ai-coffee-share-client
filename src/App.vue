@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<swipe :img-datas="imgDatas"/>
-		<products :products="products"/>
+		<products :products="products" :basic="basic"/>
 	</div>
 </template>
 
@@ -17,6 +17,7 @@
 		name: 'App',
 		data() {
 			return {
+				basic: [],
 				products: [],
 				imgDatas: [
 					"http://img0.imgtn.bdimg.com/it/u=1946406373,1354799675&fm=27&gp=0.jpg",
@@ -27,10 +28,11 @@
 			}
 		}, created() {
 			console.log("主UI");
-			this.$axios.get("./api/products").then(response => {
+			this.$axios.get("./api/data").then(response => {
 				if (response.data.code === 0) {
-					console.log(response.data.data);
-					this.products = response.data.data;
+					console.log(response.data);
+					this.basic = response.data.recdata.basic;
+					this.products = response.data.recdata.products;
 				}
 			});
 		}
