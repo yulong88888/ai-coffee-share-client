@@ -4,6 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import './http'
+import './common/stylus/index.styl';
 
 //需要的文件包
 import MintUI from 'mint-ui'

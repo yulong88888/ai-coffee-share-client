@@ -30,16 +30,19 @@
 					</li>
 				</ul>
 			</div>
+			<Shopcart></Shopcart>
 		</div>
 	</div>
 </template>
 
 <script>
 	import BScroll from 'better-scroll';
+	import Shopcart from "../shopcart/shopcart";
 
 	let isNoBegin = true;
 
 	export default {
+		components: {Shopcart},
 		name: "products",
 		props: ['products'],
 		data() {
@@ -105,7 +108,7 @@
 			},
 		},
 		updated() {
-			if(isNoBegin){
+			if (isNoBegin) {
 				this.$nextTick(() => {
 					this._initScroll();
 					this._calculateHeight();
@@ -183,6 +186,8 @@
 				.desc
 					line-height: 12px
 					margin-bottom: 8px
+					font-size: 10px
+					color: rgb(147, 153, 159)
 				.price
 					font-weight: 700
 					line-height: 24px
