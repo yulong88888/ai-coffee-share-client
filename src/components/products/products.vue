@@ -25,7 +25,7 @@
 										<span>￥{{product.price}}</span>
 									</div>
 									<div class="cartcontrol-wrapper">
-										<cartcontrol :product="product"></cartcontrol>
+										<cartcontrol @add="addProduct" :product="product"></cartcontrol>
 									</div>
 								</div>
 							</li>
@@ -33,15 +33,15 @@
 					</li>
 				</ul>
 			</div>
-			<Shopcart :select-products="selectProducts" :delivery-price="basic.deliveryPrice"
-					  :min-price="basic.minPrice"></Shopcart>
+			<shopcart ref="shopcart" :select-products="selectProducts" :delivery-price="basic.deliveryPrice"
+					  :min-price="basic.minPrice"></shopcart>
 		</div>
 	</div>
 </template>
 
 <script>
 	import BScroll from 'better-scroll';
-	import Shopcart from "../shopcart/shopcart";
+	import shopcart from "../shopcart/shopcart";
 	import Cartcontrol from "../cartcontrol/cartcontrol";
 
 	let isNoBegin = true;
@@ -49,7 +49,7 @@
 	export default {
 		components: {
 			Cartcontrol,
-			Shopcart
+			shopcart
 		},
 		name: "products",
 		props: ['products', 'basic'],
@@ -124,6 +124,15 @@
 				let productList = this.$refs.productList;
 				let el = productList[index];
 				this.productsScroll.scrollToElement(el, 300);
+			},
+			addProduct(target) {
+				this._drop(target);
+			},
+			_drop(target) {
+				// 体验优化,异步执行下落动画
+				this.$nextTick(() => {
+					this.$refs.shopcart.drop(target);
+				});
 			},
 		},
 		updated() {
