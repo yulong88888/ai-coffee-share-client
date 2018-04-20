@@ -40,7 +40,7 @@
 		name: "products",
 		props: ['products'],
 		method: {
-			initScroll() {
+			_initScroll() {
 				this.meunScroll = new BScroll(this.$refs.menuWrapper, {
 					click: true
 				});
@@ -50,16 +50,18 @@
 					probeType: 3
 				});
 
-				this.foodsScroll.on('scroll', (pos) => {
-					// 判断滑动方向，避免下拉时分类高亮错误（如第一分类商品数量为1时，下拉使得第二分类高亮）
-					if (pos.y <= 0) {
-						this.scrollY = Math.abs(Math.round(pos.y));
-					}
-				});
+				// this.foodsScroll.on('scroll', (pos) => {
+				// 	// 判断滑动方向，避免下拉时分类高亮错误（如第一分类商品数量为1时，下拉使得第二分类高亮）
+				// 	if (pos.y <= 0) {
+				// 		this.scrollY = Math.abs(Math.round(pos.y));
+				// 	}
+				// });
 			}
-		}, created() {
+		},
+		mounted() {
+			console.log("菜单UI");
 			this.$nextTick(() => {
-				this.initScroll();
+				this._initScroll();
 			});
 		}
 	}

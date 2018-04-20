@@ -25,6 +25,7 @@
 				]
 			}
 		}, created() {
+			console.log("主UI");
 			this.$axios.get("./api/products").then(response => {
 				if (response.data.code === 0) {
 					console.log(response.data.data);
