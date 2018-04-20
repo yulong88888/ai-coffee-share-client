@@ -24,13 +24,16 @@
 									<div class="price">
 										<span>￥{{product.price}}</span>
 									</div>
+									<div class="cartcontrol-wrapper">
+										<cartcontrol :product="product"></cartcontrol>
+									</div>
 								</div>
 							</li>
 						</ul>
 					</li>
 				</ul>
 			</div>
-			<Shopcart></Shopcart>
+			<Shopcart :delivery-price="deliveryPrice" :min-price="minPrice"></Shopcart>
 		</div>
 	</div>
 </template>
@@ -38,11 +41,15 @@
 <script>
 	import BScroll from 'better-scroll';
 	import Shopcart from "../shopcart/shopcart";
+	import Cartcontrol from "../cartcontrol/cartcontrol";
 
 	let isNoBegin = true;
 
 	export default {
-		components: {Shopcart},
+		components: {
+			Cartcontrol,
+			Shopcart
+		},
 		name: "products",
 		props: ['products'],
 		data() {
@@ -194,4 +201,8 @@
 					margin-right: 8px
 					font-size: 14px
 					color: rgb(240, 20, 20)
+				.cartcontrol-wrapper
+					position: absolute
+					right: 0
+					bottom: 12px
 </style>

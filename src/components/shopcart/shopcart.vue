@@ -3,7 +3,7 @@
 		<div class="content">
 			<div class="content-left">
 				<div class="logo-wrapper">
-					<div class="logo">
+					<div class="logo" :class="{'highlight':totalCount>0}">
 						<i class="icon-shopping_cart" :class="{'highlight':totalCount>0}"></i>
 					</div>
 					<div class="num" v-show="totalCount>0">{{totalCount}}</div>
@@ -11,20 +11,75 @@
 				<div class="price" :class="{'highlight':totalPrice>0}">￥{{totalPrice}}</div>
 				<div class="desc">另需配送费￥{{deliveryPrice}}元</div>
 			</div>
-			<div class="content-right"></div>
+			<div class="content-right">
+				<div class="pay" :class="payClass">
+					{{payDesc}}
+				</div>
+			</div>
 		</div>
 	</div>
 </template>
 
 <script>
 	export default {
-		name: "shopcart"
+		name: "shopcart",
+		props: {
+			selectProducts: {
+				type: Array,
+				default() {
+					return [{
+						price: 10,
+						count: 1
+					}];
+				}
+			},
+			deliveryPrice: {
+				type: Number,
+				default: 0
+			},
+			minPrice: {
+				type: Number,
+				default: 0
+			}
+		},
+		computed: {
+			totalPrice() {
+				let total = 0;
+				this.selectProducts.forEach((product) => {
+					total += product.price * product.count;
+				});
+				return total;
+			},
+			totalCount() {
+				let count = 0;
+				this.selectProducts.forEach((product) => {
+					count += product.count;
+				});
+				return count;
+			},
+			payDesc() {
+				if (this.totalPrice === 0) {
+					return `￥${this.minPrice}元起送`;
+				} else if (this.totalPrice < this.minPrice) {
+					let diff = this.minPrice - this.totalPrice;
+					return `还差￥${diff}元起送`;
+				} else {
+					return '去结算';
+				}
+			},
+			payClass() {
+				if (this.totalPrice <= this.minPrice) {
+					return 'not-enough';
+				} else {
+					return 'enough';
+				}
+			},
+		}
 	}
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
 	@import "../../common/stylus/mixin.styl"
-	/*@import "../../common/stylus/icon.styl"*/
 
 	.shopcart
 		position: fixed
