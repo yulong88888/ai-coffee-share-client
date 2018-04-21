@@ -48,7 +48,7 @@
 	import shopcart from "../shopcart/shopcart";
 	import Cartcontrol from "../cartcontrol/cartcontrol";
 	import ElDialog from "../../../node_modules/element-ui/packages/dialog/src/component.vue";
-	import Card from "../../card/card.vue";
+	import Card from "../card/card.vue";
 
 	let isNoBegin = true;
 
