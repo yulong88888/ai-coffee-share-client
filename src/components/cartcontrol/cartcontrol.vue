@@ -56,7 +56,7 @@
 				display: inline-block
 				line-height: 24px
 				font-size: 24px
-				color: rgb(0, 160, 220)
+				color: rgb(255, 128, 0)
 				transition: all 0.4s linear
 				transform: rotate(0)
 			&.move-enter-active, &.move-leave-active
@@ -80,5 +80,5 @@
 			padding: 6px
 			line-height: 24px
 			font-size: 24px
-			color: rgb(0, 160, 220)
+			color: rgb(255, 128, 0)
 </style>
