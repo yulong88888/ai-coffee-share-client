@@ -1,12 +1,11 @@
 <template>
-	<el-row>
+	<el-row class="index">
 		<el-card :body-style="{ padding: '0px' }">
-			<img src="~examples/assets/images/hamburger.png" class="image">
+			<img :src="cardDialogObj.image" class="image">
 			<div style="padding: 14px;">
-				<span>好吃的汉堡</span>
+				<span>{{cardDialogObj.name}}</span>
 				<div class="bottom clearfix">
-					<time class="time">{{ currentDate }}</time>
-					<el-button type="text" class="button">操作按钮</el-button>
+					<span class="info">{{ cardDialogObj.info }}</span>
 				</div>
 			</div>
 		</el-card>
@@ -19,6 +18,9 @@
 	export default {
 		components: {ElRow},
 		name: "card",
+		props: {
+			cardDialogObj: {}
+		},
 		data() {
 			return {
 				currentDate: new Date()
@@ -27,35 +29,29 @@
 	}
 </script>
 
-<style>
-	.time {
-		font-size: 13px;
-		color: #999;
-	}
+<style lang="stylus" rel="stylesheet/stylus">
+	.index
+		.el-card
+			border: 0
 
-	.bottom {
-		margin-top: 13px;
-		line-height: 12px;
-	}
+	.info
+		font-size: 13px
+		color: #999
 
-	.button {
-		padding: 0;
-		float: right;
-	}
+	.bottom
+		margin-top: 13px
+		line-height: 12px
 
-	.image {
-		width: 100%;
-		display: block;
-	}
+	.image
+		width: 100%
+		display: block
 
 	.clearfix:before,
-	.clearfix:after {
-		display: table;
-		content: "";
-	}
+	.clearfix:after
+		display: table
+		content: ""
 
-	.clearfix:after {
+	.clearfix:after
 		clear: both
-	}
 </style>
 

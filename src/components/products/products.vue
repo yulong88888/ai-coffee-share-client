@@ -36,6 +36,10 @@
 			<shopcart ref="shopcart" :select-products="selectProducts" :delivery-price="basic.deliveryPrice"
 					  :min-price="basic.minPrice"></shopcart>
 		</div>
+		<el-dialog :visible.sync="cardDialogVisible" width="85%" :show-close="false"
+				   custom-class="mDialog">
+			<card :card-dialog-obj="cardDialogObj"></card>
+		</el-dialog>
 	</div>
 </template>
 
@@ -43,11 +47,15 @@
 	import BScroll from 'better-scroll';
 	import shopcart from "../shopcart/shopcart";
 	import Cartcontrol from "../cartcontrol/cartcontrol";
+	import ElDialog from "../../../node_modules/element-ui/packages/dialog/src/component.vue";
+	import Card from "../../card/card.vue";
 
 	let isNoBegin = true;
 
 	export default {
 		components: {
+			Card,
+			ElDialog,
 			Cartcontrol,
 			shopcart
 		},
@@ -57,7 +65,9 @@
 			return {
 				// goods: [],
 				listHeight: [],
-				scrollY: 0
+				scrollY: 0,
+				cardDialogVisible: false,
+				cardDialogObj: {}
 			};
 		},
 		computed: {
@@ -135,8 +145,12 @@
 				});
 			},
 			mTest(obj) {
+				this.cardDialogVisible = true;
+				this.cardDialogObj = null;
+				this.cardDialogObj = obj;
 				console.log(obj.image);
 				console.log(obj.info);
+				console.log(this.cardDialogObj);
 			}
 		},
 		updated() {
@@ -230,4 +244,10 @@
 					position: absolute
 					right: 0
 					bottom: 12px
+
+	.mDialog
+		.el-dialog__header
+			padding: 0
+		.el-dialog__body
+			padding: 0
 </style>
