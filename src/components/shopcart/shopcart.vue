@@ -124,7 +124,7 @@
 				}
 			},
 			payClass() {
-				if (this.totalPrice <= this.minPrice) {
+				if (this.totalPrice < this.minPrice) {
 					return 'not-enough';
 				} else {
 					return 'enough';
