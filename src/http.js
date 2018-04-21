@@ -1,18 +1,18 @@
 import axios from 'axios';
-import {Indicator, Toast} from 'mint-ui';
+import {Loading} from 'element-ui';
+
+let loading = null;
 
 axios.interceptors.request.use(config => {
 	console.log("请求拦截");
-	Indicator.open({
-		text: '加载中...',
-		spinnerType: 'fading-circle'
-	});
+	loading = Loading.service({fullscreen: true});
 	return config;
 });
 
 axios.interceptors.response.use(config => {
 	console.log("响应拦截");
-	Indicator.close();
+	loading.close();
+	loading = null;
 	return config;
 });
 

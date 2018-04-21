@@ -5,16 +5,15 @@ import App from './App'
 import router from './router'
 import './http'
 import './common/stylus/index.styl';
-
 //需要的文件包
-import MintUI from 'mint-ui'
-import 'mint-ui/lib/style.css'
 import axios from 'axios'
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
 
 Vue.config.productionTip = false;
 
 //引入UI
-Vue.use(MintUI);
+Vue.use(ElementUI);
 //引入axios
 Vue.prototype.$axios = axios;
 

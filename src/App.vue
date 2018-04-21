@@ -1,7 +1,8 @@
 <template>
 	<div>
-		<swipe :img-datas="imgDatas"/>
+		<swipe :img-datas="basic.imgDatas"/>
 		<products :products="products" :basic="basic"/>
+		<router-link to="/goods"></router-link>
 	</div>
 </template>
 
@@ -19,12 +20,6 @@
 			return {
 				basic: [],
 				products: [],
-				imgDatas: [
-					"http://img0.imgtn.bdimg.com/it/u=1946406373,1354799675&fm=27&gp=0.jpg",
-					"http://pic1.win4000.com/wallpaper/1/598aac8d2dab2.jpg",
-					"http://img1.imgtn.bdimg.com/it/u=1482437651,683124644&fm=27&gp=0.jpg",
-					"https://www.lengmang.net/images/pic2.jpg",
-				]
 			}
 		}, created() {
 			console.log("主UI");

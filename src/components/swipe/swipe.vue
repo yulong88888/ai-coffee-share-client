@@ -1,9 +1,9 @@
 <template>
-	<mt-swipe :auto="2500" class="swipe">
-		<mt-swipe-item v-for="imgData in imgDatas" :key="imgData">
+	<el-carousel :interval="2500" arrow="never" height="150px" indicator-position="none">
+		<el-carousel-item v-for="imgData in imgDatas" :key="imgData">
 			<img :src="imgData" style="width:100%">
-		</mt-swipe-item>
-	</mt-swipe>
+		</el-carousel-item>
+	</el-carousel>
 </template>
 
 <script>
@@ -12,11 +12,3 @@
 		props: ['imgDatas'],
 	}
 </script>
-
-<style lang="stylus" rel="stylesheet/stylus">
-	@import "../../common/stylus/mixin.styl"
-
-	.swipe
-		height: 150px
-		width: 100%
-</style>

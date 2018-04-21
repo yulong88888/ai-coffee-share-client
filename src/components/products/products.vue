@@ -14,7 +14,7 @@
 					<li v-for="products_item in products" ref="productList">
 						<h1 class="title">{{products_item.name}}</h1>
 						<ul>
-							<li v-for="product in products_item.product" class="product-item">
+							<li v-for="product in products_item.product" class="product-item" @click="mTest(product)">
 								<div class="icon">
 									<img width="57" height="57" :src="product.icon">
 								</div>
@@ -134,6 +134,10 @@
 					this.$refs.shopcart.drop(target);
 				});
 			},
+			mTest(obj) {
+				console.log(obj.image);
+				console.log(obj.info);
+			}
 		},
 		updated() {
 			if (isNoBegin) {
