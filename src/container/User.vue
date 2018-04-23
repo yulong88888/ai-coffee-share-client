@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div>
-			<div class="head">
+			<div class="headImg">
 			</div>
 			<img src="https://www.lengmang.net/images/pic2.jpg" style="
 				width: 128px;
@@ -84,7 +84,7 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
-	.head
+	.headImg
 		background-image: url('https://www.lengmang.net/images/pic2.jpg')
 		background-repeat: no-repeat
 		background-size: 100% 100%
