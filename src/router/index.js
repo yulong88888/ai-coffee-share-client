@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Shop from '../container/Shop.vue'
 import Order from '../container/Order.vue'
-import User from '../container/User.vue'
+import Account from '../container/Account.vue'
 
 Vue.use(Router);
 
@@ -25,12 +25,16 @@ const routes = [
 		}
 	},
 	{
-		path: '/user',
+		path: '/account',
 		name: 'user',
-		component: User,
+		component: Account,
 		meta: {
 			title: '个人中心'
 		}
+	},
+	{
+		path: "*",
+		redirect: "/"
 	}
 ];
 
