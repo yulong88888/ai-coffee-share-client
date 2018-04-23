@@ -1,0 +1,38 @@
+{
+	"button": [
+		{
+			"type": "view",
+			"name": "定咖啡",
+			"url": "https://www.lengmang.net/ai-coffee-share/shop"
+		},
+		{
+			"name": "个人中心",
+			"sub_button": [
+				{
+					"type": "view",
+					"name": "我的咖啡库",
+					"url": "https://www.lengmang.net/ai-coffee-share/lib",
+					"sub_button": [ ]
+				},
+				{
+					"type": "view",
+					"name": "服务范围",
+					"url": "http://www.lengmang.net/ai-coffee-share/area",
+					"sub_button": [ ]
+				},
+				{
+					"type": "view",
+					"name": "我的订单",
+					"url": "http://www.lengmang.net/ai-coffee-share/order",
+					"sub_button": [ ]
+				},
+				{
+					"type": "view",
+					"name": "我的账户",
+					"url": "http://www.lengmang.net/ai-coffee-share/account",
+					"sub_button": [ ]
+				}
+			]
+		}
+	]
+}

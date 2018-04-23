@@ -1,0 +1,11 @@
+ai-coffee-share
+
+path
+
+微信通信地址
+
+//get用于校验 post处理数据
+https://www.lengmang.net/ai-coffee-share/wechat
+
+//定咖啡页面
+https://www.lengmang.net/ai-coffee-share/shop

@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Shop from '../container/Shop.vue'
-import order from '../container/Order.vue'
+import Order from '../container/Order.vue'
+import User from '../container/User.vue'
 
 Vue.use(Router);
 
@@ -18,7 +19,18 @@ const routes = [
 	{
 		path: '/order',
 		name: 'order',
-		component: order
+		component: Order,
+		meta: {
+			title: '确认订单'
+		}
+	},
+	{
+		path: '/user',
+		name: 'user',
+		component: User,
+		meta: {
+			title: '个人中心'
+		}
 	}
 ];
 
