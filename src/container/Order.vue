@@ -94,7 +94,7 @@
 		.text
 			font-size: 14px
 		.item
-			padding: 12px
+			padding: 6px
 
 	.head
 		width: 100%

@@ -219,6 +219,7 @@
 				if (this.totalPrice < this.minPrice) {
 					return;
 				}
+				this.$router.push('/order');
 				console.log(this.selectProducts);
 			}
 		}

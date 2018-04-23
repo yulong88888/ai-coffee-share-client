@@ -161,6 +161,9 @@
 				});
 				isNoBegin = false;
 			}
+		},
+		beforeDestroy(){
+			isNoBegin = true;
 		}
 	}
 </script>

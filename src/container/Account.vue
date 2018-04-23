@@ -1,20 +1,11 @@
 <template>
 	<div>
 		<div>
-			<div class="headImg">
+			<div class="headImgBG">
 			</div>
-			<img src="https://www.lengmang.net/images/pic2.jpg" style="
-				width: 128px;
-				height: 128px;
-				margin: auto;
-				position: absolute;
-				top: 0;
-				left: 0;
-				right: 0;
-				border-radius: 50%;
-				padding-top:60px"/>
+			<img src="https://www.lengmang.net/images/pic2.jpg" class="headImg"/>
 		</div>
-		<el-card class="small-card">
+		<el-card class=" small-card">
 			<el-row type="flex" class="row-bg" justify="center" style="text-align: center">
 				<el-col :span="8">
 					<h1 style="font-size: 24px;color: #FF0000">0</h1>
@@ -84,12 +75,23 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
-	.headImg
+	.headImgBG
 		background-image: url('https://www.lengmang.net/images/pic2.jpg')
 		background-repeat: no-repeat
 		background-size: 100% 100%
 		height: 250px
 		filter: blur(10px)
+
+	.headImg
+		width: 128px
+		height: 128px
+		margin: auto
+		position: absolute
+		top: 0
+		left: 0
+		right: 0
+		border-radius: 50%
+		padding-top: 60px
 
 	.small-card
 		width: 100%
@@ -97,9 +99,9 @@
 
 	.big-card
 		width: 100%
-		margin-top: 12px
+		margin-top: 6px
 		.text
 			font-size: 14px
 		.item
-			padding: 12px 0px 12px 0px
+			padding: 6px 0px 6px 0px
 </style>
