@@ -55,7 +55,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
 					res.json({code: 0, recdata: appData})
 				}, 500);
 			});
-			app.post('/api/getBaseInfo', function (req, res) {
+			app.post('/getBaseInfo', function (req, res) {
 				setTimeout(function () {
 					console.log("baseInfo");
 					res.json({code: 0, recdata: baseInfo})

@@ -1,9 +1,9 @@
 <template>
 	<div>
 		<div>
-			<div class="headImgBG">
+			<div class="headImgBG" :style="{backgroundImage: 'url('+avatar+')'}">
 			</div>
-			<img src="https://www.lengmang.net/images/pic2.jpg" class="headImg"/>
+			<img :src="{avatar}" class="headImg"/>
 		</div>
 		<el-card class=" small-card">
 			<el-row type="flex" class="row-bg" justify="center" style="text-align: center">
@@ -66,17 +66,22 @@
 </template>
 
 <script>
+	import global from "../store/index"
+
 	export default {
 		name: "user",
+		data() {
+			avatar = null;
+		},
 		created() {
 			console.log("UserUI");
+			avatar = global.userbaseInfo.headimgurl;
 		}
 	}
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
 	.headImgBG
-		background-image: url('https://www.lengmang.net/images/pic2.jpg')
 		background-repeat: no-repeat
 		background-size: 100% 100%
 		height: 200px

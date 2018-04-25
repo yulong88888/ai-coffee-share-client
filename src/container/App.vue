@@ -18,7 +18,7 @@
 				console.log("yeah");
 				this.$axios({
 					method: 'post',
-					url: "./api/getBaseInfo",
+					url: "./getBaseInfo",
 					params: {
 						"code": code,
 					}
