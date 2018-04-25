@@ -11,7 +11,9 @@ axios.interceptors.request.use(config => {
 
 axios.interceptors.response.use(config => {
 	console.log("响应拦截");
-	loading.close();
+	if (loading != null) {
+		loading.close();
+	}
 	loading = null;
 	return config;
 });
