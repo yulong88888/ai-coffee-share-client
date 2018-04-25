@@ -3,7 +3,7 @@
 		{
 			"type": "view",
 			"name": "定咖啡",
-			"url": "https://www.lengmang.net/ai-coffee-share/shop"
+			"url": "https://www.lengmang.net/ai-coffee-share/products"
 		},
 		{
 			"name": "个人中心",

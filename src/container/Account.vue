@@ -79,7 +79,7 @@
 		background-image: url('https://www.lengmang.net/images/pic2.jpg')
 		background-repeat: no-repeat
 		background-size: 100% 100%
-		height: 250px
+		height: 200px
 		filter: blur(10px)
 
 	.headImg
@@ -91,7 +91,7 @@
 		left: 0
 		right: 0
 		border-radius: 50%
-		padding-top: 60px
+		padding-top: 30px
 
 	.small-card
 		width: 100%
