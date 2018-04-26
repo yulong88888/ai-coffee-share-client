@@ -1,9 +1,9 @@
 <template>
 	<div>
 		<div>
-			<div class="headImgBG" :style="{backgroundImage: 'url('+avatar+')'}">
+			<div class="headImgBG" :style="{backgroundImage: 'url('+avatarURL+')'}">
 			</div>
-			<img :src="{avatar}" class="headImg"/>
+			<img :src="avatarURL" class="headImg"/>
 		</div>
 		<el-card class=" small-card">
 			<el-row type="flex" class="row-bg" justify="center" style="text-align: center">
@@ -66,16 +66,15 @@
 </template>
 
 <script>
-	import global from "../store/index"
-
 	export default {
 		name: "user",
-		data() {
-			avatar = null;
+		computed: {
+			avatarURL() {
+				return this.$store.getters.userBaseInfo.headimgurl;
+			},
 		},
 		created() {
 			console.log("UserUI");
-			avatar = global.userbaseInfo.headimgurl;
 		}
 	}
 </script>

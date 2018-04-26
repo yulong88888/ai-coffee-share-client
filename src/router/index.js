@@ -4,6 +4,7 @@ import Shop from '../container/Shop.vue'
 import Order from '../container/Order.vue'
 import Account from '../container/Account.vue'
 import Building from '../container/Building.vue'
+import Test from '../container/Test.vue'
 
 Vue.use(Router);
 
@@ -44,7 +45,15 @@ const routes = [
 	{
 		path: "*",
 		redirect: "/building"
-	}
+	},
+	{
+		path: '/test',
+		name: 'test',
+		component: Test,
+		meta: {
+			title: '开发中...'
+		}
+	},
 ];
 
 export default new Router({

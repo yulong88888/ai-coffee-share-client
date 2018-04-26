@@ -9,6 +9,7 @@ import './common/stylus/index.styl';
 import axios from 'axios'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+import store from './store/index'
 
 Vue.config.productionTip = false;
 
@@ -21,5 +22,6 @@ Vue.prototype.$axios = axios;
 new Vue({
 	el: '#app',
 	router,
+	store,
 	render: h => h(App)
 });

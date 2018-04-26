@@ -3,8 +3,6 @@
 </template>
 
 <script>
-	import global from "../store/index"
-
 	export default {
 		beforeCreate() {
 			console.log("获取用户基本数据");
@@ -23,8 +21,10 @@
 						"code": code,
 					}
 				}).then(response => {
-					global.userbaseInfo = response.data.recdata;
-					console.log(global.userbaseInfo);
+					console.log(response.data.recdata);
+					this.$store.dispatch('setUserBaseInfo', response.data.recdata);
+					this.$store.dispatch('test');
+					//console.log(global.userBaseInfo);
 				});
 			}
 		}
