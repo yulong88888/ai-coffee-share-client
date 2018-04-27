@@ -1,10 +1,113 @@
 <template>
-	<div>产品表</div>
+	<div>
+		<el-button type="primary" @click="dialogVisible = true">添加产品</el-button>
+
+		<el-table :data="testData" style="width: 100%">
+			<el-table-column prop="date" label="产品编号"></el-table-column>
+			<el-table-column prop="name" label="产品名称"></el-table-column>
+			<el-table-column prop="address" label="产品价格"></el-table-column>
+			<el-table-column prop="address" label="产品描述"></el-table-column>
+			<el-table-column prop="address" label="产品信息"></el-table-column>
+			<el-table-column label="操作">
+				<template slot-scope="scope">
+					<el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+					<el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+				</template>
+			</el-table-column>
+		</el-table>
+
+		<el-dialog title="添加产品" :visible.sync="dialogVisible" width="25%" :close-on-click-modal="false" center>
+			<el-form ref="product" :rules="rules" :model="product" status-icon label-width="100px"
+					 class="demo-ruleForm">
+				<el-form-item label="产品名称" prop="name">
+					<el-input v-model="product.name"></el-input>
+				</el-form-item>
+				<el-form-item label="产品价格" prop="price">
+					<el-input v-model.number="product.price"></el-input>
+				</el-form-item>
+				<el-form-item label="产品描述" prop="description">
+					<el-input v-model="product.description"></el-input>
+				</el-form-item>
+				<el-form-item label="产品信息" prop="info">
+					<el-input v-model="product.info"></el-input>
+				</el-form-item>
+				<el-form-item label="产品小图">
+					<el-upload class="upload-demo" action="https://jsonplaceholder.typicode.com/posts/" :limit="1"
+							   :auto-upload="false">
+						<el-button size="small" type="primary">选取文件</el-button>
+						<span class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</span>
+					</el-upload>
+				</el-form-item>
+				<el-form-item label="产品大图">
+					<el-upload class="upload-demo" action="https://jsonplaceholder.typicode.com/posts/" :limit="1"
+							   :auto-upload="false">
+						<el-button size="small" type="primary">选取文件</el-button>
+						<span class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</span>
+					</el-upload>
+				</el-form-item>
+			</el-form>
+			<span slot="footer" class="dialog-footer">
+				<el-button @click="dialogVisible = false">取 消</el-button>
+				<el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+  			</span>
+		</el-dialog>
+	</div>
 </template>
 
 <script>
 	export default {
-		name: "admin_products"
+		name: "admin_products",
+		data() {
+			return {
+				dialogVisible: false,
+				product: {
+					name: '',
+					price: '',
+					description: '',
+					info: '',
+					icon: '',
+					image: '',
+				},
+				rules: {
+					name: [
+						{required: true, message: '请输入产品名称', trigger: 'blur'},
+						{min: 1, max: 10, message: '长度10个字符以内', trigger: 'blur'}
+					],
+					price: [
+						{required: true, message: '请输入产品价格', trigger: 'blur'},
+						{type: 'number', message: '产品价格必须为数字值'}
+					],
+					description: [
+						{required: true, message: '请输入产品描述', trigger: 'blur'}
+					],
+					info: [
+						{required: true, message: '请输入产品信息', trigger: 'blur'}
+					]
+				},
+				testData: [{
+					date: '2016-05-02',
+					name: '王小虎',
+					address: '上海市普陀区金沙江路 1518 弄'
+				}, {
+					date: '2016-05-04',
+					name: '王小虎',
+					address: '上海市普陀区金沙江路 1517 弄'
+				}, {
+					date: '2016-05-01',
+					name: '王小虎',
+					address: '上海市普陀区金沙江路 1519 弄'
+				}, {
+					date: '2016-05-03',
+					name: '王小虎',
+					address: '上海市普陀区金沙江路 1516 弄'
+				}]
+			};
+		},
+		methods: {
+			addProduct() {
+				console.log("0.0");
+			}
+		}
 	}
 </script>
 

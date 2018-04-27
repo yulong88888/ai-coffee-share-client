@@ -1,13 +1,13 @@
 <template>
 	<el-container class="wrapper">
 		<el-header style="height: 80px;background-color: rgb(64,158,255)">
-			<img class="header-logo" alt="Logo"/>
+			<img class="header-logo" alt="AI-COFFEE-SHARE-LOGO"/>
 		</el-header>
 		<el-container class="menu">
 			<el-aside width="300px" class="menu">
 				<ul role="menubar" class="el-menu">
 					<li role="menuitem" tabindex="1" class="el-menu-item" style="padding-left: 20px;"
-						@click="handleItem(0)" :class="itemActive===0?'is-active':''">商品管理
+						@click="handleItem(0)" :class="itemActive===0?'is-active':''">产品管理
 					</li>
 					<li role="menuitem" tabindex="2" class="el-menu-item" style="padding-left: 20px;"
 						@click="handleItem(1)" :class="itemActive===1?'is-active':''">订单管理
