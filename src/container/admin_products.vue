@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<el-button type="primary" @click="dialogVisible = true">添加产品</el-button>
+		<el-button type="primary" @click="addProduct">添加产品</el-button>
 
 		<el-collapse accordion>
 			<el-collapse-item title="反馈 Feedback">
@@ -39,7 +39,7 @@
 			<el-form ref="product" :rules="rules" :model="product" status-icon label-width="100px"
 					 class="demo-ruleForm">
 				<el-form-item label="分组名称" prop="item">
-					<el-input v-model="product.item"/>
+					<el-input v-model="product.item" name="0.0"/>
 				</el-form-item>
 				<el-form-item label="产品名称" prop="name">
 					<el-input v-model="product.name"/>
@@ -51,7 +51,7 @@
 					<el-input v-model="product.description"/>
 				</el-form-item>
 				<el-form-item label="产品信息" prop="info">
-					<el-input v-model="product.info"/>
+					<el-input type="textarea" v-model="product.info"/>
 				</el-form-item>
 				<el-form-item label="产品小图">
 					<el-upload class="upload-demo" action="https://jsonplaceholder.typicode.com/posts/" :limit="1"
@@ -134,13 +134,27 @@
 		},
 		methods: {
 			addProduct() {
-				console.log("0.0");
+				this.resetForm();
+				this.dialogVisible = true;
+				this.product = {};
+				console.error(this.product);
 			},
 			handleEdit(index, row) {
+				this.resetForm();
+				this.product = row;
 				console.log(index, row);
+				console.error(this.product);
+				this.dialogVisible = true;
 			},
 			handleDelete(index, row) {
 				console.log(index, row);
+			},
+			//清空编辑框状态
+			resetForm() {
+				if (this.$refs["product"] == null) {
+					return;
+				}
+				this.$refs["product"].resetFields();
 			}
 		}
 	}
