@@ -5,11 +5,11 @@
 		<el-collapse accordion>
 			<el-collapse-item title="反馈 Feedback">
 				<el-table :data="testData" style="width: 100%">
-					<el-table-column prop="id" label="产品编号"></el-table-column>
-					<el-table-column prop="name" label="产品名称"></el-table-column>
-					<el-table-column prop="price" label="产品价格"></el-table-column>
-					<el-table-column prop="description" label="产品描述"></el-table-column>
-					<el-table-column prop="info" label="产品信息"></el-table-column>
+					<el-table-column prop="id" label="产品编号"/>
+					<el-table-column prop="name" label="产品名称"/>
+					<el-table-column prop="price" label="产品价格"/>
+					<el-table-column prop="description" label="产品描述"/>
+					<el-table-column prop="info" label="产品信息"/>
 					<el-table-column label="操作">
 						<template slot-scope="scope">
 							<el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
@@ -22,11 +22,11 @@
 		</el-collapse>
 
 		<el-table :data="testData" style="width: 100%">
-			<el-table-column prop="id" label="产品编号"></el-table-column>
-			<el-table-column prop="name" label="产品名称"></el-table-column>
-			<el-table-column prop="price" label="产品价格"></el-table-column>
-			<el-table-column prop="description" label="产品描述"></el-table-column>
-			<el-table-column prop="info" label="产品信息"></el-table-column>
+			<el-table-column prop="id" label="产品编号"/>
+			<el-table-column prop="name" label="产品名称"/>
+			<el-table-column prop="price" label="产品价格"/>
+			<el-table-column prop="description" label="产品描述"/>
+			<el-table-column prop="info" label="产品信息"/>
 			<el-table-column label="操作">
 				<template slot-scope="scope">
 					<el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
@@ -38,17 +38,20 @@
 		<el-dialog title="添加产品" :visible.sync="dialogVisible" width="25%" :close-on-click-modal="false" center>
 			<el-form ref="product" :rules="rules" :model="product" status-icon label-width="100px"
 					 class="demo-ruleForm">
+				<el-form-item label="分组名称" prop="item">
+					<el-input v-model="product.item"/>
+				</el-form-item>
 				<el-form-item label="产品名称" prop="name">
-					<el-input v-model="product.name"></el-input>
+					<el-input v-model="product.name"/>
 				</el-form-item>
 				<el-form-item label="产品价格" prop="price">
-					<el-input v-model.number="product.price"></el-input>
+					<el-input v-model.number="product.price"/>
 				</el-form-item>
 				<el-form-item label="产品描述" prop="description">
-					<el-input v-model="product.description"></el-input>
+					<el-input v-model="product.description"/>
 				</el-form-item>
 				<el-form-item label="产品信息" prop="info">
-					<el-input v-model="product.info"></el-input>
+					<el-input v-model="product.info"/>
 				</el-form-item>
 				<el-form-item label="产品小图">
 					<el-upload class="upload-demo" action="https://jsonplaceholder.typicode.com/posts/" :limit="1"
@@ -80,6 +83,7 @@
 			return {
 				dialogVisible: false,
 				product: {
+					item: '',
 					name: '',
 					price: '',
 					description: '',
@@ -88,6 +92,10 @@
 					image: '',
 				},
 				rules: {
+					item: [
+						{required: true, message: '请输入产品分组名称', trigger: 'blur'},
+						{min: 1, max: 10, message: '长度10个字符以内', trigger: 'blur'}
+					],
 					name: [
 						{required: true, message: '请输入产品名称', trigger: 'blur'},
 						{min: 1, max: 10, message: '长度10个字符以内', trigger: 'blur'}
@@ -127,6 +135,12 @@
 		methods: {
 			addProduct() {
 				console.log("0.0");
+			},
+			handleEdit(index, row) {
+				console.log(index, row);
+			},
+			handleDelete(index, row) {
+				console.log(index, row);
 			}
 		}
 	}
