@@ -2,12 +2,31 @@
 	<div>
 		<el-button type="primary" @click="dialogVisible = true">添加产品</el-button>
 
+		<el-collapse accordion>
+			<el-collapse-item title="反馈 Feedback">
+				<el-table :data="testData" style="width: 100%">
+					<el-table-column prop="id" label="产品编号"></el-table-column>
+					<el-table-column prop="name" label="产品名称"></el-table-column>
+					<el-table-column prop="price" label="产品价格"></el-table-column>
+					<el-table-column prop="description" label="产品描述"></el-table-column>
+					<el-table-column prop="info" label="产品信息"></el-table-column>
+					<el-table-column label="操作">
+						<template slot-scope="scope">
+							<el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+							<el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除
+							</el-button>
+						</template>
+					</el-table-column>
+				</el-table>
+			</el-collapse-item>
+		</el-collapse>
+
 		<el-table :data="testData" style="width: 100%">
-			<el-table-column prop="date" label="产品编号"></el-table-column>
+			<el-table-column prop="id" label="产品编号"></el-table-column>
 			<el-table-column prop="name" label="产品名称"></el-table-column>
-			<el-table-column prop="address" label="产品价格"></el-table-column>
-			<el-table-column prop="address" label="产品描述"></el-table-column>
-			<el-table-column prop="address" label="产品信息"></el-table-column>
+			<el-table-column prop="price" label="产品价格"></el-table-column>
+			<el-table-column prop="description" label="产品描述"></el-table-column>
+			<el-table-column prop="info" label="产品信息"></el-table-column>
 			<el-table-column label="操作">
 				<template slot-scope="scope">
 					<el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
@@ -47,8 +66,8 @@
 				</el-form-item>
 			</el-form>
 			<span slot="footer" class="dialog-footer">
-				<el-button @click="dialogVisible = false">取 消</el-button>
 				<el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+				<el-button @click="dialogVisible = false">取 消</el-button>
   			</span>
 		</el-dialog>
 	</div>
@@ -85,21 +104,23 @@
 					]
 				},
 				testData: [{
-					date: '2016-05-02',
-					name: '王小虎',
-					address: '上海市普陀区金沙江路 1518 弄'
+					id: 11111,
+					name: "测试数据一",
+					price: 10,
+					description: "测试数据一 明细",
+					info: "测试数据一 明细明细明细明细明细明细明细明细明细明细明细明细明细明细明细明细明细明细明细明细",
 				}, {
-					date: '2016-05-04',
-					name: '王小虎',
-					address: '上海市普陀区金沙江路 1517 弄'
+					id: 11111,
+					name: "测试数据一",
+					price: 10,
+					description: "测试数据一 明细",
+					info: "测试数据一 明细明细明细明细明细明细明细明细明细明细明细明细明细明细明细明细明细明细明细明细",
 				}, {
-					date: '2016-05-01',
-					name: '王小虎',
-					address: '上海市普陀区金沙江路 1519 弄'
-				}, {
-					date: '2016-05-03',
-					name: '王小虎',
-					address: '上海市普陀区金沙江路 1516 弄'
+					id: 11111,
+					name: "测试数据一",
+					price: 10,
+					description: "测试数据一 明细",
+					info: "测试数据一 明细明细明细明细明细明细明细明细明细明细明细明细明细明细明细明细明细明细明细明细",
 				}]
 			};
 		},
