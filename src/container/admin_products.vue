@@ -69,7 +69,7 @@
 				</el-form-item>
 			</el-form>
 			<span slot="footer" class="dialog-footer">
-				<el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+				<el-button type="primary" @click="submitProduct">确 定</el-button>
 				<el-button @click="dialogVisible = false">取 消</el-button>
   			</span>
 		</el-dialog>
@@ -83,6 +83,7 @@
 			return {
 				dialogVisible: false,
 				product: {
+					id: '',
 					item: '',
 					name: '',
 					price: '',
@@ -133,17 +134,47 @@
 			};
 		},
 		methods: {
+			//添加产品的弹窗
 			addProduct() {
 				this.resetForm();
 				this.dialogVisible = true;
 				this.product = {};
 				console.error(this.product);
 			},
+			submitProduct() {
+				this.dialogVisible = false;
+				let url = "";
+				this.product = {
+					id: '',
+					item: 'test0.0',
+					name: 'test0.0',
+					price: 'test0.0',
+					description: 'test0.0',
+					info: 'test0.0',
+					icon: 'test0.0',
+					image: 'test0.0'
+				};
+				if (this.product.id === "") {
+					url = "./api/product/add";
+					console.log("添加产品", this.product);
+				} else {
+					url = "./api/product/change";
+					console.log("修改产品", this.product);
+				}
+				this.$axios({
+					method: 'post',
+					url: url,
+					params: this.product
+				}).then(response => {
+					if (response.data.code === 0) {
+						console.log(response.data);
+					}
+				});
+				this.product = {};
+			},
 			handleEdit(index, row) {
 				this.resetForm();
 				this.product = row;
-				console.log(index, row);
-				console.error(this.product);
 				this.dialogVisible = true;
 			},
 			handleDelete(index, row) {
