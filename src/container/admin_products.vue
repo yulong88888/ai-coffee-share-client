@@ -148,7 +148,7 @@
 					id: '',
 					item: 'test0.0',
 					name: 'test0.0',
-					price: 'test0.0',
+					price: 0.0,
 					description: 'test0.0',
 					info: 'test0.0',
 					icon: 'test0.0',
@@ -164,7 +164,9 @@
 				this.$axios({
 					method: 'post',
 					url: url,
-					params: this.product
+					params: {
+						product: this.product
+					}
 				}).then(response => {
 					if (response.data.code === 0) {
 						console.log(response.data);
