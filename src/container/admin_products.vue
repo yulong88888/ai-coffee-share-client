@@ -89,8 +89,8 @@
 					price: '',
 					description: '',
 					info: '',
-					icon: '',
-					image: '',
+					iconLink: '',
+					imageLink: '',
 				},
 				rules: {
 					item: [
@@ -151,8 +151,8 @@
 					price: 0,
 					description: 'test0.0',
 					info: 'test0.0',
-					icon: 'test0.0',
-					image: 'test0.0'
+					iconLink: 'test0.0',
+					imageLink: 'test0.0'
 				};
 				if (this.product.id === null) {
 					url = "./api/product/add";
