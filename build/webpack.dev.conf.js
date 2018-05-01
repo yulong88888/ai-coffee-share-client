@@ -16,7 +16,7 @@ const PORT = process.env.PORT && Number(process.env.PORT);
 
 //自己添加的模拟数据
 const appData = require('../data/data.json');
-const baseInfo = require('../data/baseInfo.json');
+const userBaseInfo = require('../data/baseInfo.json');
 
 const devWebpackConfig = merge(baseWebpackConfig, {
 	module: {
@@ -49,17 +49,23 @@ const devWebpackConfig = merge(baseWebpackConfig, {
 			poll: config.dev.poll,
 		},
 		before(app) {
-			app.get('/api/data', function (req, res) {
+			app.get('/api/baseInfo/get', function (req, res) {
 				setTimeout(function () {
-					console.log("data");
-					res.json({code: 0, recdata: appData})
-				}, 500);
+					console.log("/api/baseInfo/get");
+					res.json({code: 0, recdata: appData.basic})
+				}, 200);
 			});
-			app.post('/getBaseInfo', function (req, res) {
+			app.get('/api/product/get', function (req, res) {
 				setTimeout(function () {
-					console.log("baseInfo");
-					res.json({code: 0, recdata: baseInfo})
-				}, 500);
+					console.log("/api/product/get");
+					res.json({code: 0, recdata: appData.products})
+				}, 200);
+			});
+			app.post('/getUserBaseInfo', function (req, res) {
+				setTimeout(function () {
+					console.log("/getUserBaseInfo");
+					res.json({code: 0, recdata: userBaseInfo})
+				}, 200);
 			})
 		}
 	},

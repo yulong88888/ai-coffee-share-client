@@ -16,14 +16,14 @@
 				console.log("yeah");
 				this.$axios({
 					method: 'post',
-					url: "./getBaseInfo",
+					url: "./getUserBaseInfo",
 					params: {
 						"code": code,
 					}
 				}).then(response => {
 					console.log(response.data.recdata);
 					this.$store.dispatch('setUserBaseInfo', response.data.recdata);
-					this.$store.dispatch('test');
+					//this.$store.dispatch('test');
 					//console.log(global.userBaseInfo);
 				});
 			}
