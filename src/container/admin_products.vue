@@ -145,16 +145,16 @@
 				this.dialogVisible = false;
 				let url = "";
 				this.product = {
-					id: '',
+					id: null,
 					item: 'test0.0',
 					name: 'test0.0',
-					price: 0.0,
+					price: 6.6,
 					description: 'test0.0',
 					info: 'test0.0',
 					icon: 'test0.0',
 					image: 'test0.0'
 				};
-				if (this.product.id === "") {
+				if (this.product.id == null) {
 					url = "./api/product/add";
 					console.log("添加产品", this.product);
 				} else {
