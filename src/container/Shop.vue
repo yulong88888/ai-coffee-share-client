@@ -17,17 +17,22 @@
 		name: 'Shop',
 		data() {
 			return {
-				basic: [],
-				products: [],
+				basic: {},
+				products: {},
 			}
 		},
 		created() {
 			console.log("主UI");
-			this.$axios.get("./api/data").then(response => {
+			this.$axios.get("./api/baseInfo/get").then(response => {
 				if (response.data.code === 0) {
-					console.log(response.data);
-					this.basic = response.data.recdata.basic;
-					this.products = response.data.recdata.products;
+					console.log(response.data.recdata);
+					this.basic = response.data.recdata;
+				}
+			});
+			this.$axios.get("./api/product/get").then(response => {
+				if (response.data.code === 0) {
+					console.log(response.data.recdata);
+					this.products = response.data.recdata;
 				}
 			});
 		}

@@ -5,19 +5,8 @@ Vue.use(vuex);
 
 export default new vuex.Store({
 	state: {
-		userBaseInfo: {
-			// "city": "",
-			// "country": "",
-			// "headimgurl": "",
-			// "language": "",
-			// "nickname": "",
-			// "openid": "",
-			// "privilege": "",
-			// "length": null,
-			// "province": "",
-			// "sex": null
-		},
-		count: 0
+		userBaseInfo: {},
+		// count: 0
 	},
 	mutations: {
 		setUserBaseInfoMutations: (state, payload) => {
@@ -25,8 +14,8 @@ export default new vuex.Store({
 			let temp = state;
 			temp.userBaseInfo = payload;
 		},
-		increment: state => state.count++,
-		decrement: state => state.count--
+		// increment: state => state.count++,
+		// decrement: state => state.count--
 	},
 	getters: {
 		userBaseInfo: state => {
@@ -38,8 +27,8 @@ export default new vuex.Store({
 		setUserBaseInfo(context, userBaseInfo) {
 			context.commit('setUserBaseInfoMutations', userBaseInfo);
 		},
-		test(context) {
-			context.commit('increment');
-		}
+		// test(context) {
+		// 	context.commit('increment');
+		// }
 	}
 })

@@ -56,6 +56,6 @@ const routes = [
 
 export default new Router({
 	mode: 'history',
-	base: "ai-coffee-share",
+	// base: "ai-coffee-share",
 	routes: routes
 })
