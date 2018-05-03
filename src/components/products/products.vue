@@ -162,7 +162,7 @@
 				isNoBegin = false;
 			}
 		},
-		beforeDestroy(){
+		beforeDestroy() {
 			isNoBegin = true;
 		}
 	}
