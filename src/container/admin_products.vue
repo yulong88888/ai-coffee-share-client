@@ -212,6 +212,7 @@
 				let url = "";
 				if (this.checkNull("nameId")) {
 					console.log("添加产品", this.product);
+					this.product.nameId = this.timeStamps;
 					url = "./api/product/set" + "?openId=" + this.$store.getters.userBaseInfo.openid;
 				} else {
 					console.log("修改产品", this.product);
