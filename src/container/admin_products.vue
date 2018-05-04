@@ -203,11 +203,6 @@
 			},
 			//上传文件控件直接处理产品数据
 			mUpload(content) {
-				console.log("上传文件的内容", content);
-				console.log("提交的数据", this.product);
-				let formData = new FormData();
-				formData.append("file", content.file);
-				formData.append("data", JSON.stringify(this.product));
 				//向服务器提交数据
 				let url = "";
 				if (this.checkNull("nameId")) {
@@ -218,6 +213,11 @@
 					console.log("修改产品", this.product);
 					url = "./api/product/update" + "?openId=" + this.$store.getters.userBaseInfo.openid;
 				}
+				console.log("上传文件的内容", content);
+				console.log("提交的数据", this.product);
+				let formData = new FormData();
+				formData.append("file", content.file);
+				formData.append("data", JSON.stringify(this.product));
 				this.$axios({
 					method: 'post',
 					url: url,
