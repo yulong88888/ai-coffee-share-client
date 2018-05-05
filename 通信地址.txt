@@ -16,5 +16,7 @@ yulong is big
 
 张铭是猪
 
+public void test();
+
 yulong 还是pig
 啊
