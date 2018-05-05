@@ -3,7 +3,7 @@
 		<el-form ref="baseInfo" :rules="baseInfoRules" :model="baseInfo" status-icon label-width="100px"
 				 class="demo-ruleForm">
 			<el-form-item label="配送费" prop="deliveryPrice">
-				<el-input v-model.number="baseInfo.deliveryPrice"/>
+				<el-input v-model.number="baseInfo.deliveryPrice" @blur="onBlur"/>
 			</el-form-item>
 			<el-form-item label="起送费" prop="minPrice">
 				<el-input v-model.number="baseInfo.minPrice" @blur="onBlur"/>
@@ -26,7 +26,6 @@
 				</el-col>
 			</el-form-item>
 		</el-form>
-		<el-button type="primary" @click="handlerSubmit">提交变更</el-button>
 	</div>
 </template>
 
@@ -73,9 +72,6 @@
 						this.$message.error(response.data.recdata.msg);
 					}
 				});
-			},
-			handlerSubmit() {
-				console.log(this.baseInfo);
 			},
 			handlerDelete(index) {
 				console.log(index);
