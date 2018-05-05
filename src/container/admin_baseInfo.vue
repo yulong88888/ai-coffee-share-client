@@ -51,10 +51,7 @@
 			}
 		},
 		methods: {
-			onBlur(){
-				console.log(this.baseInfo.minPrice);
-			},
-			onblur() {
+			onBlur() {
 				console.log(this.baseInfo);
 				let formData = new FormData();
 				formData.append("deliveryPrice", this.baseInfo.deliveryPrice);
