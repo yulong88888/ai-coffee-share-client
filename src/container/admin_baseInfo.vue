@@ -8,8 +8,8 @@
 			<el-form-item label="起送费" prop="minPrice">
 				<el-input v-model.number="baseInfo.minPrice" @blur="onBlur"/>
 			</el-form-item>
-			<el-upload class="upload-demo" :multiple="false" ref="uploadPic" action=""
-					   :httpRequest="uploadFile">
+			<el-upload class="upload-demo" :multiple="false" ref="uploadImg" action=""
+					   :httpRequest="uploadPic">
 				<el-button size="small" type="primary">上传轮播图</el-button>
 				<div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
 			</el-upload>
@@ -50,6 +50,7 @@
 			}
 		},
 		methods: {
+			//失焦触发函数
 			onBlur() {
 				console.log(this.baseInfo);
 				let formData = new FormData();
@@ -57,7 +58,7 @@
 				formData.append("minPrice", this.baseInfo.minPrice);
 				this.$axios({
 					method: 'post',
-					url: "./api/baseInfo/update",
+					url: "./api/baseInfo/update" + "?openId=" + this.$store.getters.userBaseInfo.openid,
 					data: formData,
 					headers: {'Content-Type': 'multipart/form-data'}
 				}).then(response => {
@@ -73,6 +74,7 @@
 					}
 				});
 			},
+			//删除图片
 			handlerDelete(index) {
 				console.log(index);
 				this.baseInfoBackup = this.$store.getters.baseInfo;
@@ -83,7 +85,7 @@
 				formData.append("index", index);
 				this.$axios({
 					method: 'post',
-					url: "./api/baseInfo/deleteImg",
+					url: "./api/baseInfo/deleteImg" + "?openId=" + this.$store.getters.userBaseInfo.openid,
 					data: formData,
 					headers: {'Content-Type': 'multipart/form-data'}
 				}).then(response => {
@@ -99,14 +101,15 @@
 					}
 				});
 			},
-			uploadFile(content) {
+			//上传图片
+			uploadPic(content) {
 				//向服务器提交数据
 				console.log("上传文件的内容", content);
 				let formData = new FormData();
 				formData.append("file", content.file);
 				this.$axios({
 					method: 'post',
-					url: "./api/baseInfo/uploadImg",
+					url: "./api/baseInfo/uploadImg" + "?openId=" + this.$store.getters.userBaseInfo.openid,
 					data: formData,
 					headers: {'Content-Type': 'multipart/form-data'}
 				}).then(response => {
@@ -122,6 +125,7 @@
 					}
 				});
 			},
+			//刷新数据
 			refreshBaseInfo() {
 				//获取设置商户基本信息
 				this.$axios.get("./api/baseInfo/get" + "?openId=" + this.$store.getters.userBaseInfo.openid).then(response => {
@@ -130,6 +134,7 @@
 						this.$store.dispatch('setBaseInfo', response.data.recdata);
 					}
 				});
+				this.$refs["uploadImg"].clearFiles();
 			}
 		},
 		computed: {
