@@ -6,7 +6,7 @@
 				<el-input v-model.number="baseInfo.deliveryPrice"/>
 			</el-form-item>
 			<el-form-item label="起送费" prop="minPrice">
-				<el-input v-model.number="baseInfo.minPrice"/>
+				<el-input v-model.number="baseInfo.minPrice" @blur="onBlur"/>
 			</el-form-item>
 			<el-upload class="upload-demo" :multiple="false" ref="uploadPic" action=""
 					   :httpRequest="uploadFile">
@@ -51,6 +51,9 @@
 			}
 		},
 		methods: {
+			onBlur(){
+				console.log(this.baseInfo.minPrice);
+			},
 			handlerSubmit() {
 				console.log(this.baseInfo);
 			},
