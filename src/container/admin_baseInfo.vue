@@ -51,16 +51,57 @@
 			}
 		},
 		methods: {
+			onblur() {
+				console.log(this.baseInfo);
+				let formData = new FormData();
+				formData.append("deliveryPrice", this.baseInfo.deliveryPrice);
+				formData.append("minPrice", this.baseInfo.minPrice);
+				this.$axios({
+					method: 'post',
+					url: "./api/baseInfo/update",
+					data: formData,
+					headers: {'Content-Type': 'multipart/form-data'}
+				}).then(response => {
+					console.log("删除图片的服务器回调", response);
+					if (response.data.code === 0) {
+						this.$message({
+							message: response.data.recdata.msg,
+							type: 'success'
+						});
+						this.refreshBaseInfo();
+					} else {
+						this.$message.error(response.data.recdata.msg);
+					}
+				});
+			},
 			handlerSubmit() {
 				console.log(this.baseInfo);
 			},
 			handlerDelete(index) {
 				console.log(index);
 				this.baseInfoBackup = this.$store.getters.baseInfo;
-				console.error(this.baseInfoBackup);
 				let temp = this.baseInfoBackup.imgDatas;
 				temp.splice(index, 1);
 				console.error(temp);
+				let formData = new FormData();
+				formData.append("index", index);
+				this.$axios({
+					method: 'post',
+					url: "./api/baseInfo/deleteImg",
+					data: formData,
+					headers: {'Content-Type': 'multipart/form-data'}
+				}).then(response => {
+					console.log("删除图片的服务器回调", response);
+					if (response.data.code === 0) {
+						this.$message({
+							message: response.data.recdata.msg,
+							type: 'success'
+						});
+						this.refreshBaseInfo();
+					} else {
+						this.$message.error(response.data.recdata.msg);
+					}
+				});
 			},
 			uploadFile(content) {
 				//向服务器提交数据
@@ -69,11 +110,11 @@
 				formData.append("file", content.file);
 				this.$axios({
 					method: 'post',
-					url: "./api/uploadImg",
+					url: "./api/baseInfo/uploadImg",
 					data: formData,
 					headers: {'Content-Type': 'multipart/form-data'}
 				}).then(response => {
-					console.log("上传图片服务器回调", response);
+					console.log("上传图片的服务器回调", response);
 					if (response.data.code === 0) {
 						this.$message({
 							message: response.data.recdata.msg,
@@ -99,12 +140,6 @@
 			...mapState({
 				baseInfo: 'baseInfo'
 			}),
-			// storeBaseInfo() {
-			// 	console.log("--->>>", this.$store.getters);
-			// 	this.baseInfo = this.$store.getters.baseInfo;
-			// 	return this.baseInfo;
-			// 	// return this.$store.getters.baseInfo;
-			// },
 		},
 	}
 </script>
