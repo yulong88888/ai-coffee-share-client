@@ -1,40 +1,42 @@
 <template>
 	<div>
-		<!--初始化控件，目前没有找到调用comuted从store获取数据的方法-->
-		<div v-show="false">{{storeBaseInfo}}</div>
-		<div>
-			<el-form ref="baseInfo" :rules="baseInfoRules" :model="baseInfo" status-icon label-width="100px"
-					 class="demo-ruleForm">
-				<el-form-item label="配送费" prop="deliveryPrice">
-					<el-input v-model.number="baseInfo.deliveryPrice"/>
-				</el-form-item>
-				<el-form-item label="起送费" prop="minPrice">
-					<el-input v-model.number="baseInfo.minPrice"/>
-				</el-form-item>
-				<el-form-item label="轮播图">
-					<el-col :span="4" v-for="(img,index) in baseInfo.imgDatas" :key="img" :offset="1">
-						<el-card :body-style="{ padding: '0px' }">
-							<img :src="img" class="image">
-							<div style="padding: 6px;float: right">
-								<div class="bottom">
-									<el-button type="text" class="button" @click="handlerDelete(index)">删除</el-button>
-								</div>
+		<el-form ref="baseInfo" :rules="baseInfoRules" :model="baseInfo" status-icon label-width="100px"
+				 class="demo-ruleForm">
+			<el-form-item label="配送费" prop="deliveryPrice">
+				<el-input v-model.number="baseInfo.deliveryPrice"/>
+			</el-form-item>
+			<el-form-item label="起送费" prop="minPrice">
+				<el-input v-model.number="baseInfo.minPrice"/>
+			</el-form-item>
+			<el-upload class="upload-demo" :multiple="false" ref="uploadPic" action=""
+					   :httpRequest="uploadFile">
+				<el-button size="small" type="primary">上传轮播图</el-button>
+				<div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+			</el-upload>
+			<el-form-item label="轮播图">
+				<el-col :span="4" v-for="(img,index) in baseInfo.imgDatas" :key="img" :offset="1">
+					<el-card :body-style="{ padding: '0px' }">
+						<img :src="img" class="image">
+						<div style="padding: 6px;float: right">
+							<div class="bottom">
+								<el-button type="text" class="button" @click="handlerDelete(index)">删除</el-button>
 							</div>
-						</el-card>
-					</el-col>
-				</el-form-item>
-			</el-form>
-			<el-button type="primary" @click="handlerSubmit">保存</el-button>
-		</div>
+						</div>
+					</el-card>
+				</el-col>
+			</el-form-item>
+		</el-form>
+		<el-button type="primary" @click="handlerSubmit">提交变更</el-button>
 	</div>
 </template>
 
 <script>
+	import {mapState} from 'vuex';
+
 	export default {
 		name: "admin_baseinfo",
 		data() {
 			return {
-				baseInfo: {},
 				baseInfoBackup: {},
 				baseInfoRules: {
 					deliveryPrice: [
@@ -59,14 +61,50 @@
 				let temp = this.baseInfoBackup.imgDatas;
 				temp.splice(index, 1);
 				console.error(temp);
+			},
+			uploadFile(content) {
+				//向服务器提交数据
+				console.log("上传文件的内容", content);
+				let formData = new FormData();
+				formData.append("file", content.file);
+				this.$axios({
+					method: 'post',
+					url: "./api/uploadImg",
+					data: formData,
+					headers: {'Content-Type': 'multipart/form-data'}
+				}).then(response => {
+					console.log("上传图片服务器回调", response);
+					if (response.data.code === 0) {
+						this.$message({
+							message: response.data.recdata.msg,
+							type: 'success'
+						});
+						this.refreshBaseInfo();
+					} else {
+						this.$message.error(response.data.recdata.msg);
+					}
+				});
+			},
+			refreshBaseInfo() {
+				//获取设置商户基本信息
+				this.$axios.get("./api/baseInfo/get" + "?openId=" + this.$store.getters.userBaseInfo.openid).then(response => {
+					if (response.data.code === 0) {
+						console.log(response.data.recdata);
+						this.$store.dispatch('setBaseInfo', response.data.recdata);
+					}
+				});
 			}
 		},
 		computed: {
-			storeBaseInfo() {
-				console.log("--->>>", this.$store.getters);
-				this.baseInfo = this.$store.getters.baseInfo;
-				return this.$store.getters.baseInfo;
-			},
+			...mapState({
+				baseInfo: 'baseInfo'
+			}),
+			// storeBaseInfo() {
+			// 	console.log("--->>>", this.$store.getters);
+			// 	this.baseInfo = this.$store.getters.baseInfo;
+			// 	return this.baseInfo;
+			// 	// return this.$store.getters.baseInfo;
+			// },
 		},
 	}
 </script>
