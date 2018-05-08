@@ -153,7 +153,14 @@
 				console.log(this.cardDialogObj);
 			}
 		},
+		created() {
+			this.$nextTick(() => {
+				this._initScroll();
+				this._calculateHeight();
+			});
+		},
 		updated() {
+			console.log("updated isNoBegin", isNoBegin);
 			if (isNoBegin) {
 				this.$nextTick(() => {
 					this._initScroll();
@@ -164,6 +171,7 @@
 		},
 		beforeDestroy() {
 			isNoBegin = true;
+			console.log("beforeDestroy", isNoBegin);
 		}
 	}
 </script>
