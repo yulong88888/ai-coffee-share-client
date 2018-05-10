@@ -58,7 +58,7 @@
 				formData.append("minPrice", this.baseInfo.minPrice);
 				this.$axios({
 					method: 'post',
-					url: "./api/baseInfo/update" + "?openId=" + this.$store.getters.userBaseInfo.openid,
+					url: "./api/baseInfo/update",
 					data: formData,
 					headers: {'Content-Type': 'multipart/form-data'}
 				}).then(response => {
@@ -85,7 +85,7 @@
 				formData.append("index", index);
 				this.$axios({
 					method: 'post',
-					url: "./api/baseInfo/deleteImg" + "?openId=" + this.$store.getters.userBaseInfo.openid,
+					url: "./api/baseInfo/deleteImg",
 					data: formData,
 					headers: {'Content-Type': 'multipart/form-data'}
 				}).then(response => {
@@ -109,7 +109,7 @@
 				formData.append("file", content.file);
 				this.$axios({
 					method: 'post',
-					url: "./api/baseInfo/uploadImg" + "?openId=" + this.$store.getters.userBaseInfo.openid,
+					url: "./api/baseInfo/uploadImg",
 					data: formData,
 					headers: {'Content-Type': 'multipart/form-data'}
 				}).then(response => {
@@ -128,7 +128,7 @@
 			//刷新数据
 			refreshBaseInfo() {
 				//获取设置商户基本信息
-				this.$axios.get("./api/baseInfo/get" + "?openId=" + this.$store.getters.userBaseInfo.openid).then(response => {
+				this.$axios.get("./api/baseInfo/get").then(response => {
 					if (response.data.code === 0) {
 						console.log(response.data.recdata);
 						this.$store.dispatch('setBaseInfo', response.data.recdata);
