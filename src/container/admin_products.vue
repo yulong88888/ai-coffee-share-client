@@ -208,10 +208,10 @@
 				if (this.checkNull("nameId")) {
 					console.log("添加产品", this.product);
 					this.product.nameId = this.timeStamps;
-					url = "./api/product/set" + "?openId=" + this.$store.getters.userBaseInfo.openid;
+					url = "./api/product/set";
 				} else {
 					console.log("修改产品", this.product);
-					url = "./api/product/update" + "?openId=" + this.$store.getters.userBaseInfo.openid;
+					url = "./api/product/update";
 				}
 				console.log("上传文件的内容", content);
 				console.log("提交的数据", this.product);
@@ -251,7 +251,7 @@
 			refreshProducts() {
 				this.$axios({
 					method: 'get',
-					url: "./api/product/get" + "?openId=" + this.$store.getters.userBaseInfo.openid,
+					url: "./api/product/get",
 				}).then(response => {
 					console.log("刷新产品", response);
 					if (response.data.code === 0) {
@@ -265,7 +265,7 @@
 			console.log("admin_product");
 			this.$axios({
 				method: 'get',
-				url: "./api/product/get" + "?openId=" + this.$store.getters.userBaseInfo.openid,
+				url: "./api/product/get",
 			}).then(response => {
 				console.log("刷新产品", response);
 				if (response.data.code === 0) {
