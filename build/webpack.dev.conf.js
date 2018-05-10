@@ -17,6 +17,8 @@ const PORT = process.env.PORT && Number(process.env.PORT);
 //自己添加的模拟数据
 const appData = require('../data/data.json');
 const userBaseInfo = require('../data/baseInfo.json');
+const account = require('../data/account.json');
+const buyInfo = require('../data/buyInfo.json');
 
 const devWebpackConfig = merge(baseWebpackConfig, {
 	module: {
@@ -66,7 +68,25 @@ const devWebpackConfig = merge(baseWebpackConfig, {
 					console.log("/getUserBaseInfo");
 					res.json({code: 0, recdata: userBaseInfo})
 				}, 200);
-			})
+			});
+			app.get('/api/account/getAccountInfo', function (req, res) {
+				setTimeout(function () {
+					console.log("/api/account/getAccountInfo");
+					res.json({code: 0, recdata: account})
+				}, 200);
+			});
+			app.post('/api/shopCart/get', function (req, res) {
+				setTimeout(function () {
+					console.log("/api/shopCart/get");
+					res.json({"code": 0, recdata: buyInfo})
+				}, 200);
+			});
+			app.post('/api/shopCart/set', function (req, res) {
+				setTimeout(function () {
+					console.log("/api/shopCart/get");
+					res.json({"code": 0, recdata: 0})
+				}, 200);
+			});
 		}
 	},
 	plugins: [
