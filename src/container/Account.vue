@@ -17,7 +17,7 @@
 				</el-col>
 				<el-col :span="8">
 					<h1 style="font-size: 24px;color: #FF0000">0</h1>
-					<div style="text-align: center">鸡巴豆</div>
+					<div style="text-align: center">咖啡豆</div>
 				</el-col>
 			</el-row>
 		</el-card>
