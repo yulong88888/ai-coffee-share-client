@@ -104,7 +104,7 @@
 				this.selectProducts.forEach((product) => {
 					total += product.price * product.count;
 				});
-				return total;
+				return total.toFixed(2);
 			},
 			totalCount() {
 				let count = 0;
@@ -219,8 +219,27 @@
 				if (this.totalPrice < this.minPrice) {
 					return;
 				}
-				this.$router.push('/order');
-				console.log(this.selectProducts);
+				console.log(JSON.stringify(this.selectProducts));
+				this.$axios({
+					method: 'post',
+					url: "./api/shopCart/set",
+					data: JSON.stringify(this.selectProducts),
+					// headers: {'Content-Type': 'multipart/form-data'}
+				}).then(response => {
+					//跳转到下单页面
+					if (response.data.code === 0) {
+						this.$router.push({
+							path: '/order',
+						});
+					}
+				});
+
+				//获取购买的东西
+				// this.$axios.post("./api/shopCart/get").then(response => {
+				// 	if (response.data.code === 0) {
+				// 		console.log(response.data.recdata);
+				// 	}
+				// });
 			}
 		}
 	}
