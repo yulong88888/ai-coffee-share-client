@@ -19,6 +19,7 @@ const appData = require('../data/data.json');
 const userBaseInfo = require('../data/baseInfo.json');
 const account = require('../data/account.json');
 const buyInfo = require('../data/buyInfo.json');
+const info = require('../data/info.json');
 
 const devWebpackConfig = merge(baseWebpackConfig, {
 	module: {
@@ -85,6 +86,12 @@ const devWebpackConfig = merge(baseWebpackConfig, {
 				setTimeout(function () {
 					console.log("/api/shopCart/get");
 					res.json({"code": 0, recdata: 0})
+				}, 200);
+			});
+			app.post('/api/account/getAccountInfo', function (req, res) {
+				setTimeout(function () {
+					console.log("/api/account/getAccountInfo");
+					res.json({"code": 0, recdata: info})
 				}, 200);
 			});
 		}
