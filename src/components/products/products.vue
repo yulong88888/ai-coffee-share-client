@@ -60,10 +60,13 @@
 			shopcart
 		},
 		name: "products",
-		props: ['products', 'basic'],
+		props: ['basic'],
+		// props: ['products', 'basic'],
 		data() {
 			return {
 				// goods: [],
+				products: [],
+				buyProducts: [],
 				listHeight: [],
 				scrollY: 0,
 				cardDialogVisible: false,
@@ -87,6 +90,7 @@
 				this.products.forEach((product) => {
 					product.product.forEach((p) => {
 						if (p.count) {
+							console.error("0.0.0.0", p);
 							products.push(p);
 						}
 					});
@@ -146,7 +150,6 @@
 			},
 			mTest(obj) {
 				this.cardDialogVisible = true;
-				this.cardDialogObj = null;
 				this.cardDialogObj = obj;
 				console.log(obj.image);
 				console.log(obj.info);
@@ -154,21 +157,46 @@
 			}
 		},
 		created() {
-			this.$nextTick(() => {
-				this._initScroll();
-				this._calculateHeight();
+			// // 获取购买的东西
+			// this.$axios.post("./api/shopCart/get").then(response => {
+			// 	if (response.data.code === 0) {
+			// 		console.log("加载服务器Session商品", response.data.recdata);
+			// 		if (typeof (response.data.recdata) + "" === "undefined") {
+			// 			this.buyProducts = [];
+			// 			return;
+			// 		}
+			// 		this.buyProducts = response.data.recdata;
+			// 	}
+			// });
+
+			//获取设置产品基本信息
+			this.$axios.get("./api/product/get").then(response => {
+				if (response.data.code === 0) {
+					console.log(response.data.recdata);
+					this.products = response.data.recdata;
+					this.$nextTick(() => {
+						this._initScroll();
+						this._calculateHeight();
+					});
+				}
 			});
+
+			//console.log("isNoBegin", isNoBegin);
+			// this.$nextTick(() => {
+			// 	this._initScroll();
+			// 	this._calculateHeight();
+			// });
 		},
-		updated() {
-			console.log("updated isNoBegin", isNoBegin);
-			if (isNoBegin) {
-				this.$nextTick(() => {
-					this._initScroll();
-					this._calculateHeight();
-				});
-				isNoBegin = false;
-			}
-		},
+		// beforeUpdate() {
+		// 	console.log("isNoBegin", isNoBegin);
+		// 	if (isNoBegin) {
+		// 		this.$nextTick(() => {
+		// 			this._initScroll();
+		// 			this._calculateHeight();
+		// 		});
+		// 		isNoBegin = false;
+		// 	}
+		// },
 		beforeDestroy() {
 			isNoBegin = true;
 			console.log("beforeDestroy", isNoBegin);
