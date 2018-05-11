@@ -6,6 +6,7 @@ import Account from '../container/Account.vue'
 import Building from '../container/Building.vue'
 import Admin from '../container/Admin.vue'
 import Test from '../container/Test.vue'
+import Info from '../container/Info.vue'
 
 Vue.use(Router);
 
@@ -28,6 +29,13 @@ const routes = [
 		path: '/account',
 		name: 'account',
 		component: Account,
+		meta: {
+			title: '个人中心'
+		}
+	}, {
+		path: '/info',
+		name: 'info',
+		component: Info,
 		meta: {
 			title: '个人中心'
 		}
@@ -56,6 +64,6 @@ const routes = [
 
 export default new Router({
 	mode: 'history',
-	base: "ai-coffee-share",
+	// base: "ai-coffee-share",
 	routes: routes
 })
