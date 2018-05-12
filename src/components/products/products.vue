@@ -61,10 +61,8 @@
 		},
 		name: "products",
 		props: ['basic'],
-		// props: ['products', 'basic'],
 		data() {
 			return {
-				// goods: [],
 				products: [],
 				buyProducts: [],
 				listHeight: [],
