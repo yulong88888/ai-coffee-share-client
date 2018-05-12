@@ -38,7 +38,7 @@
 							<li class="product" v-for="product in selectProducts">
 								<span class="name">{{product.name}}</span>
 								<div class="price">
-									<span>￥{{product.price * product.count}}</span>
+									<span>￥{{(product.price * product.count).toFixed(2)}}</span>
 								</div>
 								<div class="cartcontrol-wrapper">
 									<cartcontrol @add="addProduct" :product="product"></cartcontrol>
