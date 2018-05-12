@@ -25,24 +25,6 @@
 				}).then(response => {
 					console.log(response.data.recdata);
 					this.$store.dispatch('setUserBaseInfo', response.data.recdata);
-					//this.$store.dispatch('test');
-					//console.log(global.userBaseInfo);
-
-					// //获取设置商户基本信息
-					// this.$axios.get("./api/baseInfo/get").then(response => {
-					// 	if (response.data.code === 0) {
-					// 		console.log(response.data.recdata);
-					// 		this.$store.dispatch('setBaseInfo', response.data.recdata);
-					// 	}
-					// });
-
-					// //获取设置产品基本信息
-					// this.$axios.get("./api/product/get").then(response => {
-					// 	if (response.data.code === 0) {
-					// 		console.log(response.data.recdata);
-					// 		this.$store.dispatch('setProductInfo', response.data.recdata);
-					// 	}
-					// });
 				});
 			}
 		}
