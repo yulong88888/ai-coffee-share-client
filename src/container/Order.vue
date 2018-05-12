@@ -25,7 +25,7 @@
 			</div>
 			<el-main>
 				<el-card class="big-card">
-					<div v-for="obj in buyProducts" :key="obj.id">
+					<div v-for="obj in orderInfo" :key="obj.id">
 						<div class="item text">
 							<span>{{ obj.name }}</span>
 							<span>x{{ obj.count }}</span>
@@ -52,7 +52,13 @@
 				<div @click="dialogVisible = true">
 					<el-card style="margin-top: 10px">
 						<span>备注</span>
-						<span style="float: right">对骑手小哥哥说
+						<span style="float: right">
+							<span v-if="msg===''">
+								对骑手小哥哥说
+							</span>
+							<span v-if="msg!==''">
+								{{this.msg.substring(0,10)+"..."}}
+							</span>
 							<span class="el-icon-arrow-right" style="float: right"></span>
 						</span>
 					</el-card>
@@ -65,11 +71,8 @@
 				</div>
 			</el-footer>
 		</el-container>
-		<el-dialog
-			title="备注"
-			:visible.sync="dialogVisible"
-			width="90%">
-			<el-input placeholder="请输入内容" type="textarea" :rows="3"/>
+		<el-dialog title="备注" :visible.sync="dialogVisible" width="90%">
+			<el-input placeholder="请输入内容" type="textarea" :autosize="{ minRows: 3, maxRows: 5}" v-model="msg"/>
 			<span slot="footer" class="dialog-footer">
 				<el-button @click="dialogVisible = false">取 消</el-button>
 				<el-button type="primary" @click="dialogVisible = false">确 定</el-button>
@@ -84,8 +87,9 @@
 		data() {
 			return {
 				//购买的产品
-				buyProducts: [],
+				orderInfo: [],
 				accountInfo: {},
+				msg: '',
 				totalPrice: 0,
 				dialogVisible: false,
 			}
@@ -104,7 +108,30 @@
 				console.log("selectCoupon");
 			},
 			toPay() {
-				console.log("toPay");
+				console.log("toPay", this.accountInfo, this.orderInfo, this.msg);
+				if (JSON.stringify(this.accountInfo) === "{}") {
+					this.$message.error("地址还没有选择哦");
+					return
+				}
+				this.$axios({
+					method: "post",
+					url: "./api/order/set",
+					data: {
+						accountInfo: this.accountInfo,
+						orderInfo: this.orderInfo,
+						msg: this.msg
+					}
+				}).then(response => {
+					if (response.data.code !== 0) {
+						this.$message.error(response.data.recdata.msg);
+					} else {
+						this.$message({
+							message: response.data.recdata.msg,
+							type: 'success'
+						});
+					}
+					this.dialogVisible = false;
+				});
 			},
 			// // 取到路由带过来的参数
 			// getParams() {
@@ -125,13 +152,13 @@
 				if (response.data.code === 0) {
 					console.log("加载服务器Session商品", response.data.recdata);
 					if (typeof (response.data.recdata) + "" === "undefined") {
-						this.buyProducts = [];
+						this.orderInfo = [];
 						return;
 					}
-					this.buyProducts = response.data.recdata;
+					this.orderInfo = response.data.recdata;
 					//计算总价
 					let temp = 0;
-					this.buyProducts.forEach(function (obj) {
+					this.orderInfo.forEach(function (obj) {
 						temp += obj.price * obj.count;
 					});
 					this.totalPrice = temp;
