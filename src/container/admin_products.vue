@@ -28,7 +28,8 @@
 			</div>
 		</el-collapse>
 
-		<el-dialog title="添加产品" :visible.sync="dialogVisible" width="25%" :close-on-click-modal="false" center>
+		<el-dialog title="添加产品" :visible.sync="dialogVisible" width="25%" :close-on-click-modal="false"
+				   :before-close="dialogClose" center>
 			<el-form ref="product" :rules="rules" :model="product" status-icon label-width="100px"
 					 class="demo-ruleForm">
 				<el-form-item label="分组名称" prop="item">
@@ -56,7 +57,6 @@
 			</el-form>
 			<span slot="footer" class="dialog-footer">
 				<el-button type="primary" @click="handlerSubmit">确 定</el-button>
-				<el-button @click="dialogVisible = false">取 消</el-button>
   			</span>
 		</el-dialog>
 	</div>
@@ -105,25 +105,6 @@
 						{required: true, message: '请输入产品信息', trigger: 'blur'}
 					]
 				},
-				testData: [{
-					id: 11111,
-					name: "测试数据一",
-					price: 10,
-					description: "测试数据一 明细",
-					info: "测试数据一 明细明细明细明细明细明细明细明细明细明细明细明细明细明细明细明细明细明细明细明细",
-				}, {
-					id: 11111,
-					name: "测试数据一",
-					price: 10,
-					description: "测试数据一 明细",
-					info: "测试数据一 明细明细明细明细明细明细明细明细明细明细明细明细明细明细明细明细明细明细明细明细",
-				}, {
-					id: 11111,
-					name: "测试数据一",
-					price: 10,
-					description: "测试数据一 明细",
-					info: "测试数据一 明细明细明细明细明细明细明细明细明细明细明细明细明细明细明细明细明细明细明细明细",
-				}]
 			};
 		},
 		methods: {
@@ -151,6 +132,7 @@
 				this.dialogVisible = false;
 				this.$refs.uploadPic.submit();
 				this.product = {};
+				this.refreshProducts();
 			},
 			//编辑产品
 			handleEdit(index, row) {
@@ -259,9 +241,14 @@
 						this.products = response.data.recdata;
 					}
 				});
+			},
+			//关闭弹窗
+			dialogClose() {
+				this.dialogVisible = false;
+				this.refreshProducts();
 			}
 		},
-		beforeCreate() {
+		created() {
 			console.log("admin_product");
 			this.$axios({
 				method: 'get',
