@@ -30,13 +30,14 @@
 </template>
 
 <script>
-	import {mapState} from 'vuex';
 
 	export default {
 		name: "admin_baseinfo",
 		data() {
 			return {
-				baseInfoBackup: {},
+				//基础信息
+				baseInfo: {},
+				//基础校验规则
 				baseInfoRules: {
 					deliveryPrice: [
 						{required: true, message: '请输入配送费价格', trigger: 'blur'},
@@ -50,7 +51,7 @@
 			}
 		},
 		methods: {
-			//失焦触发函数
+			//TODO 失焦触发函数
 			onBlur() {
 				console.log(this.baseInfo);
 				let formData = new FormData();
@@ -62,7 +63,7 @@
 					data: formData,
 					headers: {'Content-Type': 'multipart/form-data'}
 				}).then(response => {
-					console.log("删除图片的服务器回调", response);
+					console.log("失焦提交的服务器响应", response);
 					if (response.data.code === 0) {
 						this.$message({
 							message: response.data.recdata.msg,
@@ -74,13 +75,10 @@
 					}
 				});
 			},
-			//删除图片
+			//TODO 删除图片
 			handlerDelete(index) {
-				console.log(index);
-				this.baseInfoBackup = this.$store.getters.baseInfo;
-				let temp = this.baseInfoBackup.imgDatas;
+				let temp = this.baseInfo.imgDatas;
 				temp.splice(index, 1);
-				console.error(temp);
 				let formData = new FormData();
 				formData.append("index", index);
 				this.$axios({
@@ -101,7 +99,7 @@
 					}
 				});
 			},
-			//上传图片
+			//TODO 上传图片
 			uploadPic(content) {
 				//向服务器提交数据
 				console.log("上传文件的内容", content);
@@ -125,27 +123,28 @@
 					}
 				});
 			},
-			//刷新数据
+			//TODO 刷新数据
 			refreshBaseInfo() {
 				//获取设置商户基本信息
 				this.$axios.get("./api/baseInfo/get").then(response => {
 					if (response.data.code === 0) {
-						console.log(response.data.recdata);
-						this.$store.dispatch('setBaseInfo', response.data.recdata);
+						this.baseInfo = response.data.recdata;
 					}
 				});
+				if (this.$refs["uploadImg"] == null) {
+					return;
+				}
 				this.$refs["uploadImg"].clearFiles();
 			}
 		},
-		computed: {
-			...mapState({
-				baseInfo: 'baseInfo'
-			}),
-		},
+		//创建的时候
+		created() {
+			this.refreshBaseInfo();
+		}
 	}
 </script>
 
-<style>
+<style scoped>
 	.image {
 		width: 100%;
 		height: 100%;
