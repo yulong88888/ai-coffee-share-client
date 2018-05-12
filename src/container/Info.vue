@@ -96,7 +96,7 @@
 					this.$refs["infoForm"].resetFields();
 				}
 			},
-			//TODO 对数据进行服务器对接 删除数据
+			//TODO 删除数据
 			deleteInfo(index) {
 				console.log("delete" + index);
 				this.$axios({
@@ -129,7 +129,7 @@
 					this.$message.error("数据有为空的哦，请仔细检查");
 					return;
 				}
-				//TODO 对数据进行服务器对接 增加和更新数据
+				//TODO 增加和更新数据
 				if (this.index !== -1) {
 					console.log("修改了数据", this.index, this.infoForm);
 					this.$axios({
