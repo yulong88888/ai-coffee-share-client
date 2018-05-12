@@ -63,9 +63,6 @@
 </template>
 
 <script>
-	//用于上传文件的文件随机ID
-	// let uploadIconData = {};
-	// let uploadImageData = {};
 	export default {
 		name: "admin_products",
 		data() {
@@ -142,7 +139,7 @@
 				this.product = row;
 				this.dialogVisible = true;
 			},
-			//删除产品
+			//TODO 删除产品
 			handleDelete(index, row) {
 				console.log(index, row);
 				this.$axios({
@@ -183,7 +180,7 @@
 					return true;
 				}
 			},
-			//上传文件控件直接处理产品数据
+			//TODO 上传文件控件直接处理产品数据
 			mUpload(content) {
 				//向服务器提交数据
 				let url = "";
@@ -229,7 +226,7 @@
 				}
 				this.fileList = fileList;
 			},
-			//刷新产品列表，UI也会更新
+			//TODO 刷新产品列表，UI也会更新
 			refreshProducts() {
 				this.$axios({
 					method: 'get',
@@ -250,16 +247,7 @@
 		},
 		created() {
 			console.log("admin_product");
-			this.$axios({
-				method: 'get',
-				url: "./api/product/get",
-			}).then(response => {
-				console.log("刷新产品", response);
-				if (response.data.code === 0) {
-					console.log(response.data.recdata);
-					this.products = response.data.recdata;
-				}
-			});
+			this.refreshProducts();
 		}
 	}
 </script>
